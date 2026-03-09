@@ -84,7 +84,7 @@ async function buildPortfolioContext(): Promise<string> {
       acc[cat].push(`${skill.name} (${skill.proficiency}%)`);
       return acc;
     }, {} as Record<string, string[]>);
-    Object.entries(grouped).forEach(([cat, list]) => {
+    (Object.entries(grouped) as [string, string[]][]).forEach(([cat, list]) => {
       lines.push(`${cat}: ${list.join(', ')}`);
     });
     lines.push('');
