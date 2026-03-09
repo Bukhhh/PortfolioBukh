@@ -1,0 +1,394 @@
+/* Pixel Art Font Import - Must be first */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-pixel: 'Press Start 2P', cursive;
+  --font-pixel-body: 'VT323', monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.125rem;
+  /* Dark blue/black theme */
+  --background: oklch(0.07 0.02 250);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.1 0.02 250);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.1 0.02 250);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.6 0.2 250);
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.18 0.02 250);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.15 0.02 250);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.2 0.03 250);
+  --accent-foreground: oklch(0.95 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --border: oklch(0.25 0.03 250);
+  --input: oklch(0.18 0.02 250);
+  --ring: oklch(0.6 0.2 250);
+  --chart-1: oklch(0.6 0.2 250);
+  --chart-2: oklch(0.55 0.18 230);
+  --chart-3: oklch(0.6 0.15 220);
+  --chart-4: oklch(0.65 0.2 260);
+  --chart-5: oklch(0.5 0.15 240);
+  --sidebar: oklch(0.08 0.02 250);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.6 0.2 250);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
+  --sidebar-accent: oklch(0.18 0.02 250);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(0.25 0.03 250);
+  --sidebar-ring: oklch(0.6 0.2 250);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.1 0.02 250);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.3 0.03 250);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.4 0.04 250);
+}
+
+/* Pixel Art Base Styles */
+* {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+body {
+  font-family: 'VT323', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Pixel Art Typography */
+.pixel-title {
+  font-family: 'Press Start 2P', cursive;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 
+    2px 2px 0 oklch(0 0 0 / 0.8),
+    -1px -1px 0 oklch(0.4 0.2 250 / 0.5);
+}
+
+.pixel-text {
+  font-family: 'VT323', monospace;
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Pixel Art Button */
+.pixel-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.65rem;
+  padding: 12px 20px;
+  border: 4px solid;
+  border-color: oklch(0.7 0.2 250) oklch(0.3 0.15 250) oklch(0.3 0.15 250) oklch(0.7 0.2 250);
+  box-shadow: 
+    inset -2px -2px 0 oklch(0.2 0.1 250),
+    inset 2px 2px 0 oklch(0.8 0.15 250),
+    4px 4px 0 oklch(0 0 0 / 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.1s;
+}
+
+.pixel-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 
+    inset -2px -2px 0 oklch(0.2 0.1 250),
+    inset 2px 2px 0 oklch(0.8 0.15 250),
+    6px 6px 0 oklch(0 0 0 / 0.5);
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 
+    inset -2px -2px 0 oklch(0.2 0.1 250),
+    inset 2px 2px 0 oklch(0.8 0.15 250),
+    2px 2px 0 oklch(0 0 0 / 0.5);
+}
+
+/* Pixel Art Card */
+.pixel-card {
+  border: 4px solid oklch(0.4 0.2 250);
+  box-shadow: 
+    inset -4px -4px 0 oklch(0.15 0.02 250),
+    inset 4px 4px 0 oklch(0.25 0.03 250),
+    8px 8px 0 oklch(0 0 0 / 0.3);
+  background: oklch(0.1 0.02 250 / 0.9);
+}
+
+/* Pixel Art Border */
+.pixel-border {
+  border: 4px solid oklch(0.5 0.2 250);
+  box-shadow:
+    0 0 0 2px oklch(0.1 0.02 250),
+    0 0 0 4px oklch(0.3 0.15 250);
+}
+
+/* Scanline Effect (optional) */
+.scanlines::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    oklch(0 0 0 / 0.03) 2px,
+    oklch(0 0 0 / 0.03) 4px
+  );
+  z-index: 9999;
+}
+
+/* CRT Effect (optional) */
+.crt-effect {
+  animation: crt-flicker 0.15s infinite;
+}
+
+@keyframes crt-flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes portal-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes portal-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes slide-in-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes robot-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-2deg); }
+  75% { transform: translateY(-5px) rotate(2deg); }
+}
+
+@keyframes typing-dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+/* Pixel art blink animation */
+@keyframes pixel-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-portal-spin {
+  animation: portal-spin 8s linear infinite;
+}
+
+.animate-portal-pulse {
+  animation: portal-pulse 2s ease-in-out infinite;
+}
+
+.animate-slide-in-up {
+  animation: slide-in-up 0.5s ease-out forwards;
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+.animate-robot-bounce {
+  animation: robot-bounce 2s ease-in-out infinite;
+}
+
+.animate-pixel-blink {
+  animation: pixel-blink 1s steps(1) infinite;
+}
+
+/* Gradient text - Blue theme */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.6 0.2 250), oklch(0.5 0.25 230));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  background: oklch(0.12 0.02 250 / 0.85);
+  backdrop-filter: blur(4px);
+  border: 4px solid oklch(0.4 0.2 250 / 0.5);
+  box-shadow:
+    inset -4px -4px 0 oklch(0.08 0.02 250),
+    inset 4px 4px 0 oklch(0.18 0.02 250);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.2s;
+}
+
+.card-hover:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 
+    inset -4px -4px 0 oklch(0.08 0.02 250),
+    inset 4px 4px 0 oklch(0.18 0.02 250),
+    12px 12px 0 oklch(0 0 0 / 0.4);
+}
+
+/* Section line - Blue */
+.section-line::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    oklch(0.6 0.2 250),
+    oklch(0.6 0.2 250) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  margin-left: 16px;
+}
+
+/* Progress bar - Blue */
+.progress-bar {
+  background: repeating-linear-gradient(
+    90deg,
+    oklch(0.6 0.2 250),
+    oklch(0.5 0.25 230)
+  );
+  transition: width 0.5s ease;
+}
+
+/* Chat bubble animations */
+@keyframes message-appear {
+  0% { opacity: 0; transform: translateY(10px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.message-appear {
+  animation: message-appear 0.3s ease-out forwards;
+}
+
+/* Typing indicator */
+.typing-indicator::after {
+  content: '';
+  animation: typing-dots 1.5s infinite;
+}
+
+/* Pixel art input styling */
+input, textarea, select {
+  font-family: 'VT323', monospace !important;
+  font-size: 1.25rem !important;
+  border: 4px solid oklch(0.4 0.2 250) !important;
+  box-shadow: inset -2px -2px 0 oklch(0.15 0.02 250), inset 2px 2px 0 oklch(0.2 0.02 250) !important;
+  background: oklch(0.1 0.02 250) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: oklch(0.6 0.2 250) !important;
+  box-shadow: 
+    inset -2px -2px 0 oklch(0.15 0.02 250), 
+    inset 2px 2px 0 oklch(0.2 0.02 250),
+    0 0 0 2px oklch(0.6 0.2 250 / 0.3) !important;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

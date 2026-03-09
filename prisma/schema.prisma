@@ -1,0 +1,157 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Admin user for authentication
+model Admin {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Profile information
+model Profile {
+  id           String   @id @default(cuid())
+  name         String
+  title        String
+  subtitle     String?
+  bio          String
+  avatarUrl    String?
+  resumeUrl    String?
+  email        String?
+  phone        String?
+  location     String?
+  githubUrl    String?
+  linkedinUrl  String?
+  twitterUrl   String?
+  websiteUrl   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Projects/Portfolio items
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  longDescription String?
+  imageUrl    String?
+  images      String?  // JSON array of multiple images for slideshow
+  demoUrl     String?
+  githubUrl   String?
+  techStack   String   // JSON array of technologies
+  category    String?  // web, mobile, ai, etc.
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  status      String   @default("completed") // completed, in-progress
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Skills
+model Skill {
+  id          String   @id @default(cuid())
+  name        String
+  category    String   // Frontend, Backend, AI/ML, Tools, etc.
+  proficiency Int      @default(80) // 0-100
+  iconUrl     String?
+  color       String?  // For styling
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Experience/Work history
+model Experience {
+  id          String   @id @default(cuid())
+  title       String
+  company     String
+  description String
+  startDate   String
+  endDate     String?
+  location    String?
+  type        String   @default("work") // work, internship, freelance
+  current     Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Education
+model Education {
+  id           String   @id @default(cuid())
+  institution  String
+  degree       String
+  field        String?
+  gpa          String?
+  startDate    String
+  endDate      String?
+  description  String?
+  achievements String?  // JSON array of achievements
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Achievements/Awards
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        String
+  issuer      String?
+  imageUrl    String?
+  link        String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Media library
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String
+  alt       String?
+  type      String   @default("image") // image, document, video
+  size      Int?
+  createdAt DateTime @default(now())
+}
+
+// Site settings
+model Settings {
+  id              String   @id @default(cuid())
+  introEnabled    Boolean  @default(true)
+  introDuration   Int      @default(6000) // milliseconds
+  introMessage    String?
+  assistantName   String   @default("Robo")
+  assistantType   String   @default("robot")
+  theme           String   @default("dark")
+  primaryColor    String   @default("#3b82f6")
+  siteTitle       String   @default("Portfolio")
+  siteDescription String?
+  showIntro       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Contact messages
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
