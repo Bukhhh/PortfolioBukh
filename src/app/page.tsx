@@ -1501,6 +1501,81 @@ function AIDiscoverySection() {
 
 
 
+// Custom Cursor Component
+function CustomCursor() {
+  const [mounted, setMounted] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const isClickable = 
+        target.tagName.toLowerCase() === 'a' ||
+        target.tagName.toLowerCase() === 'button' ||
+        target.closest('a') !== null ||
+        target.closest('button') !== null ||
+        target.classList.contains('cursor-pointer') ||
+        window.getComputedStyle(target).cursor === 'pointer';
+        
+      setIsHovering(isClickable);
+    };
+
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+      window.removeEventListener('mouseover', handleMouseOver);
+    };
+  }, []);
+
+  if (!mounted || (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)) {
+    return null;
+  }
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (pointer: fine) {
+          body, a, button, input, textarea, select, [role="button"] { cursor: none !important; }
+        }
+      `}} />
+      <div className="hidden md:block pointer-events-none z-[9999] fixed inset-0">
+        <motion.div
+          className="fixed top-0 left-0 w-3 h-3 bg-blue-400 rounded-full mix-blend-screen"
+          animate={{
+            x: mousePosition.x - 6,
+            y: mousePosition.y - 6,
+            scale: isHovering ? 0 : 1,
+            opacity: mousePosition.x === 0 && mousePosition.y === 0 ? 0 : 1
+          }}
+          transition={{ type: 'tween', ease: 'backOut', duration: 0.1 }}
+        />
+        <motion.div
+          className="fixed top-0 left-0 w-10 h-10 border-2 border-blue-400 rounded-full mix-blend-screen flex items-center justify-center backdrop-blur-[1px]"
+          animate={{
+            x: mousePosition.x - 20,
+            y: mousePosition.y - 20,
+            scale: isHovering ? 1.5 : 1,
+            backgroundColor: isHovering ? 'rgba(96, 165, 250, 0.2)' : 'rgba(96, 165, 250, 0.05)',
+            opacity: mousePosition.x === 0 && mousePosition.y === 0 ? 0 : 1
+          }}
+          transition={{ type: 'tween', ease: 'backOut', duration: 0.15 }}
+        />
+      </div>
+    </>
+  );
+}
+
 // Main Portfolio Component
 export default function Portfolio() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -1737,6 +1812,7 @@ export default function Portfolio() {
 
   return (
     <main className="min-h-screen flex flex-col bg-background text-foreground scanlines">
+      <CustomCursor />
       {/* Intro Portal */}
       <AnimatePresence>
         {shouldShowIntro && !introComplete && settings && (
