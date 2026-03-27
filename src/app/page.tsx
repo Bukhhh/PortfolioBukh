@@ -1311,61 +1311,29 @@ function ContactForm({ profile }: { profile: Profile | null }) {
 // AI Model data for AIDiscoverySection
 const AI_MODELS = [
   {
-    name: 'Claude',
-    provider: 'Anthropic',
-    description: 'Advanced reasoning AI with extended thinking capabilities',
-    specialty: 'Complex reasoning & code generation',
+    name: 'n8n',
+    provider: 'Workflow Automation',
+    description: 'Fair-code licensed workflow automation tool. Extensible and highly customizable.',
+    specialty: 'Node-based Workflows',
     color: 'orange',
+    logoUrl: 'https://n8n.io/favicon.ico'
   },
   {
-    name: 'Gemini Pro',
-    provider: 'Google DeepMind',
-    description: 'Multimodal AI excelling at text, image, and code understanding',
-    specialty: 'Multimodal & long context',
-    color: 'blue',
-  },
-  {
-    name: 'DeepSeek',
-    provider: 'DeepSeek AI',
-    description: 'Open-source AI with chain-of-thought reasoning',
-    specialty: 'Open-source reasoning',
+    name: 'Manus',
+    provider: 'Manus AI',
+    description: 'AI-first development and agentic workforce platform capabilities.',
+    specialty: 'Agentic Intelligence',
     color: 'cyan',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=manus.im&sz=128'
   },
   {
-    name: 'Grok',
-    provider: 'xAI',
-    description: 'Real-time knowledge AI with X/Twitter integration',
-    specialty: 'Real-time knowledge',
-    color: 'purple',
-  },
-  {
-    name: 'GLM/ChatGLM',
-    provider: 'Zhipu AI',
-    description: 'Bilingual Chinese-English model with strong code capabilities',
-    specialty: 'Bilingual & code',
-    color: 'green',
-  },
-  {
-    name: 'Kilo Code',
-    provider: 'Kilo AI',
-    description: 'Open-source agentic coding assistant',
-    specialty: 'Agentic code generation',
-    color: 'yellow',
-  },
-  {
-    name: 'Lovable',
-    provider: 'Lovable',
-    description: 'AI-powered full-stack app builder',
-    specialty: 'Full-stack app generation',
+    name: 'MiniMax',
+    provider: 'MiniMax AI',
+    description: 'Advanced Chinese-English bilingual AI models with strong generation skills.',
+    specialty: 'Generative Models',
     color: 'pink',
-  },
-  {
-    name: 'Replit Agent',
-    provider: 'Replit',
-    description: 'AI coding assistant that builds and deploys apps in cloud',
-    specialty: 'Cloud-based app builder',
-    color: 'red',
-  },
+    logoUrl: 'https://www.google.com/s2/favicons?domain=minimaxi.com&sz=128'
+  }
 ];
 
 // Color mappings for AI models
@@ -1387,7 +1355,7 @@ function AIDiscoverySection() {
     <section id="ai-discovery" className="py-20 px-6 bg-card/30">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}>
-          <span className="text-blue-400 mr-3 text-sm">06.</span>AI Discovery<span className="section-line" />
+          <span className="text-blue-400 mr-3 text-sm">05.</span>AI Discovery<span className="section-line" />
         </h2>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1405,8 +1373,12 @@ function AIDiscoverySection() {
                   <CardContent className="p-6">
                     {/* Header with logo badge */}
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-12 h-12 rounded-lg ${colors.bg} ${colors.border} border-2 flex items-center justify-center`}>
-                        <Bot className={`w-6 h-6 ${colors.text}`} />
+                      <div className={`w-12 h-12 rounded-lg ${colors.bg} ${colors.border} border-2 flex items-center justify-center p-1 overflow-hidden`}>
+                        {model.logoUrl ? (
+                          <img src={model.logoUrl} alt={`${model.name} logo`} className="w-8 h-8 object-contain" />
+                        ) : (
+                          <Bot className={`w-6 h-6 ${colors.text}`} />
+                        )}
                       </div>
                       <div>
                         <h3 className="font-bold text-lg">{model.name}</h3>
@@ -1455,126 +1427,7 @@ function AIDiscoverySection() {
   );
 }
 
-// Achievements Section Component
-function AchievementsSection() {
-  const achievements = [
-    {
-      type: 'award',
-      title: '1st Place / Gold Medal',
-      project: 'ClaRity - Skin Analyzer Project',
-      description: 'Won first place for developing AI-powered skin analysis system using Computer Vision',
-      icon: Trophy,
-      color: 'yellow',
-    },
-    {
-      type: 'academic',
-      title: "Dean's List Awardee",
-      project: 'Semester 5',
-      description: 'Recognized for outstanding academic performance with CGPA 3.66 at UiTM',
-      icon: Medal,
-      color: 'blue',
-    },
-  ];
 
-  const careerTargets = {
-    roles: ['Software Engineer', 'AI Engineer', 'Backend Developer'],
-    industries: ['Cybersecurity', 'AI Research', 'Fintech'],
-  };
-
-  return (
-    <section id="achievements" className="py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}>
-          <span className="text-blue-400 mr-3 text-sm">05.</span>Achievements<span className="section-line" />
-        </h2>
-
-        {/* Awards Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {achievements.map((achievement, index) => {
-            const colors = COLOR_MAP[achievement.color];
-            const Icon = achievement.icon;
-            return (
-              <motion.div
-                key={achievement.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className={`h-full border-4 ${colors.border} glass card-hover overflow-hidden`}>
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className={`w-14 h-14 rounded-xl ${colors.bg} ${colors.border} border-2 flex items-center justify-center shrink-0`}>
-                        <Icon className={`w-7 h-7 ${colors.text}`} />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-lg mb-1">{achievement.title}</h3>
-                        <p className={`${colors.text} font-semibold text-sm mb-2`}>{achievement.project}</p>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {achievement.description}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Career Direction */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <Card className="border-4 border-blue-500/30 glass overflow-hidden">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Target className="w-6 h-6 text-blue-400" />
-                <h3 className="font-bold text-xl">Career Direction</h3>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Target Roles */}
-                <div>
-                  <h4 className="text-sm font-semibold text-blue-400 mb-3 pixel-text">TARGETING ROLES</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {careerTargets.roles.map((role) => (
-                      <Badge key={role} className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-4 py-2">
-                        {role}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Target Industries */}
-                <div>
-                  <h4 className="text-sm font-semibold text-blue-400 mb-3 pixel-text">INDUSTRIES</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {careerTargets.industries.map((industry) => (
-                      <Badge key={industry} className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-4 py-2">
-                        {industry}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              {/* Open to learning message */}
-              <div className="mt-6 pt-6 border-t border-blue-500/20">
-                <p className="text-muted-foreground text-center italic pixel-text">
-                  🚀 Open to learning new technologies and challenges
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
 // Main Portfolio Component
 export default function Portfolio() {
@@ -1835,11 +1688,10 @@ export default function Portfolio() {
                 <div className="hidden md:flex gap-6">
                   <a href="#education" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">01.</span> Education</a>
                   <a href="#experience" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">02.</span> Experience</a>
-                  <a href="#skills" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">03.</span> Skills</a>
-                  <a href="#projects" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">04.</span> Projects</a>
-                  <a href="#achievements" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">05.</span> Achievements</a>
-                  <a href="#ai-discovery" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">06.</span> AI</a>
-                  <a href="#contact" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">07.</span> Contact</a>
+                  <a href="#projects" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">03.</span> Projects</a>
+                  <a href="#certificates" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">04.</span> Certificates</a>
+                  <a href="#ai-discovery" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">05.</span> AI</a>
+                  <a href="#contact" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">06.</span> Contact</a>
                 </div>
                 <div className="flex items-center gap-4 border-l border-blue-500/20 pl-4">
                   <div className="hidden sm:flex items-center gap-2">
@@ -1986,6 +1838,11 @@ export default function Portfolio() {
                           {exp.description && (
                             <p className="text-muted-foreground text-sm mt-2">{exp.description}</p>
                           )}
+                          {exp.company === 'Madani IT Solution' && (
+                            <div className="mt-4 overflow-hidden rounded-lg border border-blue-500/30">
+                              <img src="/upload/projects/Madani IT Solution/photo_2026-03-28_00-16-09.jpg" alt="Madani IT Solution Internship" className="w-full object-cover max-h-[300px] hover:scale-105 transition-transform duration-500" />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </Card>
@@ -1995,43 +1852,11 @@ export default function Portfolio() {
             </div>
           </section>
 
-          {/* Skills Section */}
-          <section id="skills" className="py-20 px-6">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">03.</span>Skills<span className="section-line" /></h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Object.entries(groupedSkills).map(([category, categorySkills], index) => (
-                  <motion.div key={category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
-                    <Card className="p-6 border-border glass card-hover h-full">
-                      <div className="flex items-center gap-2 mb-4">
-                        {category.toLowerCase().includes('frontend') && <Code className="w-5 h-5 text-blue-400" />}
-                        {category.toLowerCase().includes('backend') && <Database className="w-5 h-5 text-blue-400" />}
-                        {category.toLowerCase().includes('ai') && <Brain className="w-5 h-5 text-blue-400" />}
-                        {category.toLowerCase().includes('tool') && <Layers className="w-5 h-5 text-blue-400" />}
-                        {!['frontend', 'backend', 'ai', 'tool'].some(c => category.toLowerCase().includes(c)) && <Zap className="w-5 h-5 text-blue-400" />}
-                        <h3 className="font-bold text-lg">{category}</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {categorySkills.map(skill => (
-                          <div key={skill.id}>
-                            <div className="flex justify-between text-sm mb-1"><span>{skill.name}</span><span className="text-blue-400">{skill.proficiency}%</span></div>
-                            <div className="h-2 bg-blue-900/30 rounded-full overflow-hidden">
-                              <motion.div className="h-full bg-gradient-to-r from-blue-400 to-blue-500" initial={{ width: 0 }} whileInView={{ width: `${skill.proficiency}%` }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
 
           {/* Projects Section */}
           <section id="projects" className="py-20 px-6 bg-card/30">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">04.</span>Projects<span className="section-line" /></h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">03.</span>Projects<span className="section-line" /></h2>
               {/* Project Cards with Zig-Zag Layout and Carousel */}
               <div className="space-y-12">
                 {projects.map((project, index) => {
@@ -2137,8 +1962,58 @@ export default function Portfolio() {
             </div>
           </section>
 
-          {/* Achievements Section */}
-          <AchievementsSection />
+
+
+          {/* Certificates Section */}
+          <section id="certificates" className="py-20 px-6">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">04.</span>Certificates<span className="section-line" /></h2>
+              <div className="grid md:grid-cols-2 gap-6 mb-12">
+                {achievements.map((cert, index) => (
+                  <motion.div
+                    key={cert.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Card className="h-full border-4 border-blue-500/30 glass card-hover overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
+                      <CardContent className="p-0 flex flex-col h-full">
+                        {cert.imageUrl && (
+                           <div className="aspect-[4/3] relative overflow-hidden bg-blue-900/20 border-b-2 border-blue-500/20">
+                             {cert.imageUrl.endsWith('.pdf') ? (
+                               <div className="absolute inset-0 flex flex-col items-center justify-center bg-blue-900/30">
+                                 <Award className="w-12 h-12 text-blue-400 mb-2" />
+                                 <span className="text-sm font-bold text-blue-300">PDF Document</span>
+                                 <a href={cert.imageUrl} target="_blank" rel="noopener noreferrer" className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-2 rounded text-xs pixel-btn" style={{ fontFamily: "'Press Start 2P', cursive" }}>View PDF</a>
+                               </div>
+                             ) : (
+                               <img src={cert.imageUrl} alt={cert.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                             )}
+                           </div>
+                        )}
+                        <div className="p-6 flex-1 flex flex-col">
+                          <h3 className="font-bold text-lg mb-1">{cert.title}</h3>
+                          {cert.issuer && <p className="text-blue-400 font-semibold text-sm mb-2">{cert.issuer}</p>}
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
+                            {cert.description}
+                          </p>
+                          <div className="flex justify-between items-center text-xs text-muted-foreground pt-4 border-t border-blue-500/10">
+                            <span className="flex items-center gap-1 font-mono">{cert.date}</span>
+                            {cert.link && (
+                              <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline flex items-center gap-1">
+                                View Credential <ExternalLink className="w-3 h-3" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           {/* AI Discovery Section */}
           <AIDiscoverySection />
@@ -2146,7 +2021,7 @@ export default function Portfolio() {
           {/* Contact Section */}
           <section id="contact" className="py-20 px-6 bg-card/30">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">07.</span>Get In Touch</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">06.</span>Get In Touch</h2>
               <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
                 I&apos;m currently looking for new opportunities. Feel free to reach out!
               </p>
