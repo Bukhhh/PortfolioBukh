@@ -195,7 +195,7 @@ async function seedContent() {
       description: "Completed comprehensive WordPress web development course.",
       date: "2024",
       issuer: "Coursera",
-      imageUrl: "/upload/certificates/Wordpress CourseEra.pdf",
+      imageUrl: "/upload/certificates/Screenshot 2026-03-28 023032.png",
       link: "",
       order: 2
     }

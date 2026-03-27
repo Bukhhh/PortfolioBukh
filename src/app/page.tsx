@@ -1311,6 +1311,78 @@ function ContactForm({ profile }: { profile: Profile | null }) {
 // AI Model data for AIDiscoverySection
 const AI_MODELS = [
   {
+    name: 'Claude',
+    provider: 'Anthropic',
+    description: 'Advanced reasoning AI with extended thinking capabilities. Powers Claude Code for agentic coding.',
+    specialty: 'Complex reasoning & code generation',
+    color: 'orange',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=anthropic.com&sz=128'
+  },
+  {
+    name: 'Gemini Pro',
+    provider: 'Google DeepMind',
+    description: 'Multimodal AI excelling at text, image, and code understanding with massive context windows.',
+    specialty: 'Multimodal & long context',
+    color: 'blue',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=deepmind.google&sz=128'
+  },
+  {
+    name: 'DeepSeek',
+    provider: 'DeepSeek AI',
+    description: 'Open-source AI with chain-of-thought reasoning. DeepSeek R1 rivals top proprietary models.',
+    specialty: 'Open-source reasoning',
+    color: 'cyan',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=deepseek.com&sz=128'
+  },
+  {
+    name: 'Grok',
+    provider: 'xAI',
+    description: 'Real-time knowledge AI with X/Twitter integration. Known for wit and current information.',
+    specialty: 'Real-time knowledge',
+    color: 'purple',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=x.ai&sz=128'
+  },
+  {
+    name: 'GLM (ChatGLM)',
+    provider: 'Zhipu AI',
+    description: 'Bilingual Chinese-English model with strong code and math capabilities.',
+    specialty: 'Bilingual & code',
+    color: 'green',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=zhipuai.cn&sz=128'
+  },
+  {
+    name: 'Kilo Code',
+    provider: 'Kilo AI',
+    description: 'Open-source agentic coding assistant. VS Code extension for code generation and refactoring.',
+    specialty: 'Agentic code generation',
+    color: 'yellow',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=kilo.gg&sz=128'
+  },
+  {
+    name: 'Lovable',
+    provider: 'Lovable',
+    description: 'AI-powered full-stack app builder. Natural language to production-ready React applications.',
+    specialty: 'Full-stack app generation',
+    color: 'pink',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=lovable.dev&sz=128'
+  },
+  {
+    name: 'Antigravity',
+    provider: 'Google',
+    description: 'Google\'s agentic development platform for AI-assisted coding and project scaffolding.',
+    specialty: 'Agentic development',
+    color: 'cyan',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=google.com&sz=128'
+  },
+  {
+    name: 'Replit Agent',
+    provider: 'Replit',
+    description: 'AI coding assistant that builds, deploys, and iterates on full applications in the cloud.',
+    specialty: 'Cloud-based app builder',
+    color: 'red',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=replit.com&sz=128'
+  },
+  {
     name: 'n8n',
     provider: 'Workflow Automation',
     description: 'Fair-code licensed workflow automation tool. Extensible and highly customizable.',
@@ -1811,43 +1883,71 @@ export default function Portfolio() {
           <section id="experience" className="py-20 px-6 bg-card/30">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">02.</span>Experience<span className="section-line" /></h2>
-              <div className="space-y-6">
-                {experiences.map((exp, index) => (
-                  <motion.div 
-                    key={exp.id} 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    viewport={{ once: true }} 
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Card className="p-6 border-border glass card-hover border-l-4 border-l-blue-500">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center shrink-0">
-                          <Briefcase className="w-6 h-6 text-blue-400" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between flex-wrap gap-2">
-                            <h3 className="font-bold text-lg">{exp.title}</h3>
-                            {exp.current && <Badge className="bg-green-500/20 text-green-400 border border-green-500/30">Current</Badge>}
-                          </div>
-                          <p className="text-blue-400 font-semibold">{exp.company}</p>
-                          <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-                            <span>{exp.startDate} - {exp.endDate || 'Present'}</span>
-                            {exp.location && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{exp.location}</span>}
-                          </div>
-                          {exp.description && (
-                            <p className="text-muted-foreground text-sm mt-2">{exp.description}</p>
-                          )}
-                          {exp.company === 'Madani IT Solution' && (
-                            <div className="mt-4 overflow-hidden rounded-lg border border-blue-500/30">
-                              <img src="/upload/projects/Madani IT Solution/photo_2026-03-28_00-16-09.jpg" alt="Madani IT Solution Internship" className="w-full object-cover max-h-[300px] hover:scale-105 transition-transform duration-500" />
+              <div className="space-y-12">
+                {experiences.map((exp, index) => {
+                  const isEven = index % 2 === 0;
+                  const expImg = exp.company.includes('Loca') 
+                    ? 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1000&auto=format&fit=crop'
+                    : exp.company.includes('Madani') 
+                      ? '/upload/projects/Madani IT Solution/photo_2026-03-28_00-16-09.jpg'
+                      : 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop';
+                      
+                  return (
+                    <motion.div key={exp.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }}>
+                      <Card className="overflow-hidden border-border glass bg-card/40 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
+                        <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} h-full`}>
+                          {/* Image Side */}
+                          <div className="w-full lg:w-1/2 relative min-h-[300px] lg:min-h-[400px] bg-black/50 overflow-hidden group">
+                            <img
+                              src={expImg}
+                              alt={exp.company}
+                              className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                            />
+                            {/* Overlay tag */}
+                            <div className="absolute top-4 left-4 z-10">
+                              <Badge className="bg-black/80 backdrop-blur-md text-blue-400 border border-blue-500/30 font-mono">
+                                {exp.type.toUpperCase()}
+                              </Badge>
                             </div>
-                          )}
+                          </div>
+
+                          {/* Content Side */}
+                          <div className="w-full lg:w-1/2 p-8 md:p-12 flex flex-col justify-center relative">
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-transparent pointer-events-none" />
+                            <div className="relative z-10">
+                              <h3 className="text-2xl md:text-3xl font-bold mb-2 flex flex-wrap items-center gap-3">
+                                {exp.title}
+                                {exp.current && <Badge className="bg-green-500/20 text-green-400 border border-green-500/30">Current</Badge>}
+                              </h3>
+                              
+                              <p className="text-xl text-blue-400 font-semibold mb-6 flex items-center gap-2">
+                                <Briefcase className="w-5 h-5 inline-block" /> {exp.company}
+                              </p>
+
+                              <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-muted-foreground bg-black/30 w-full md:w-max px-4 py-2 rounded-lg border border-white/5">
+                                <span className="flex items-center gap-2">
+                                  <span>{exp.startDate} - {exp.endDate || 'Present'}</span>
+                                </span>
+                                {exp.location && (
+                                  <>
+                                    <span className="hidden md:inline-block w-px h-4 bg-border" />
+                                    <span className="flex items-center gap-2">
+                                      <MapPin className="w-4 h-4 text-blue-400/70" /> {exp.location}
+                                    </span>
+                                  </>
+                                )}
+                              </div>
+
+                              <div className="text-muted-foreground leading-relaxed text-sm lg:text-base border-l-2 border-blue-500/20 pl-4">
+                                {exp.description}
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
+                      </Card>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </section>
