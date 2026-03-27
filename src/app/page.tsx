@@ -1589,6 +1589,20 @@ export default function Portfolio() {
   const [educations, setEducations] = useState<Education[]>([]);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
+  
+  const [visitorChatbotEnabled, setVisitorChatbotEnabled] = useState(true);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('visitor_chatbot');
+    if (saved !== null) {
+      setVisitorChatbotEnabled(saved === 'true');
+    }
+  }, []);
+
+  const toggleVisitorChatbot = (checked: boolean) => {
+    setVisitorChatbotEnabled(checked);
+    localStorage.setItem('visitor_chatbot', String(checked));
+  };
 
   const fetchData = async () => {
     try {
@@ -1827,8 +1841,20 @@ export default function Portfolio() {
                   <a href="#ai-discovery" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">06.</span> AI</a>
                   <a href="#contact" className="text-muted-foreground hover:text-blue-400 transition-colors font-mono text-sm"><span className="text-blue-400">07.</span> Contact</a>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setShowAdmin(true)} className="text-muted-foreground hover:text-blue-400"><Settings className="w-5 h-5" /></Button>
-                {profile?.githubUrl && <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors"><Github className="w-5 h-5" /></a>}
+                <div className="flex items-center gap-4 border-l border-blue-500/20 pl-4">
+                  <div className="hidden sm:flex items-center gap-2">
+                    <Label className="text-xs text-muted-foreground flex items-center gap-1 cursor-pointer font-mono" onClick={() => toggleVisitorChatbot(!visitorChatbotEnabled)}>
+                      <Bot className="w-3 h-3 text-blue-400" /> AI
+                    </Label>
+                    <Switch 
+                      checked={visitorChatbotEnabled} 
+                      onCheckedChange={toggleVisitorChatbot}
+                      className="scale-75"
+                    />
+                  </div>
+                  <Button variant="ghost" size="icon" onClick={() => setShowAdmin(true)} className="text-muted-foreground hover:text-blue-400"><Settings className="w-5 h-5" /></Button>
+                  {profile?.githubUrl && <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors"><Github className="w-5 h-5" /></a>}
+                </div>
               </div>
             </div>
           </nav>
@@ -2196,7 +2222,7 @@ export default function Portfolio() {
       )}
 
       {/* Chatbot */}
-      {settings?.introEnabled && <Chatbot assistantName={settings.assistantName} profile={profile} settings={settings} />}
+      {settings?.introEnabled && visitorChatbotEnabled && <Chatbot assistantName={settings.assistantName} profile={profile} settings={settings} />}
 
       {/* Background Music Player */}
       <MusicPlayer />
