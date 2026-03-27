@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const srcDir = path.join(__dirname, 'projects images');
-const destDir = path.join(__dirname, 'public', 'upload');
+const srcDir = path.join(__dirname, '..', 'projects images');
+const destDir = path.join(__dirname, '..', 'public', 'upload');
 
 // Folders to create
 const folders = [
@@ -37,6 +37,7 @@ copyFiles(path.join(srcDir, 'BankaiBotMY'), path.join(destDir, 'projects/BankaiB
 copyFiles(path.join(srcDir, 'CLARITY'), path.join(destDir, 'projects/CLARITY'));
 copyFiles(path.join(srcDir, 'KerjayaTechMY'), path.join(destDir, 'projects/KerjayaTechMY'));
 copyFiles(path.join(srcDir, 'RentVerse'), path.join(destDir, 'projects/RentVerse'));
+copyFiles(path.join(srcDir, 'Madani IT Solution'), path.join(destDir, 'projects/Madani IT Solution'));
 
 // Copy Certificates
 copyFiles(path.join(srcDir, 'CLARITY'), path.join(destDir, 'certificates'), 'clarity_');
