@@ -1776,7 +1776,6 @@ export default function Portfolio() {
                       className="scale-75"
                     />
                   </div>
-                  <Button variant="ghost" size="icon" onClick={() => setShowAdmin(true)} className="text-muted-foreground hover:text-blue-400"><Settings className="w-5 h-5" /></Button>
                   {profile?.githubUrl && <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors"><Github className="w-5 h-5" /></a>}
                 </div>
               </div>
