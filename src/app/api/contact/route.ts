@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import nodemailer from 'nodemailer';
 
 // GET - Fetch all contact messages
 export async function GET() {
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     
+    // 1. Save to Database
     const message = await db.contactMessage.create({
       data: {
         name: data.name,
@@ -30,6 +32,37 @@ export async function POST(request: NextRequest) {
         message: data.message,
       },
     });
+
+    // 2. Send Email via Nodemailer
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER, // Send to yourself
+        subject: `New Portfolio Message: ${data.subject || 'No Subject'}`,
+        text: `You have received a new message from your portfolio website.\n\nName: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}\n\nMessage:\n${data.message}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+            <h2 style="color: #3b82f6;">New Portfolio Message</h2>
+            <p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+            <p><strong>Subject:</strong> ${data.subject}</p>
+            <hr />
+            <p><strong>Message:</strong></p>
+            <p style="white-space: pre-wrap;">${data.message}</p>
+          </div>
+        `,
+      };
+
+      await transporter.sendMail(mailOptions);
+    }
 
     return NextResponse.json(message);
   } catch (error) {

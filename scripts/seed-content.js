@@ -198,6 +198,15 @@ async function seedContent() {
       imageUrl: "/upload/certificates/Screenshot 2026-03-28 023032.png",
       link: "",
       order: 2
+    },
+    {
+      title: "Latest Online Certificate",
+      description: "Completed recent online certification.",
+      date: "2026",
+      issuer: "Online Platform",
+      imageUrl: "/upload/certificates/Screenshot 2026-03-31 144212.png",
+      link: "",
+      order: 3
     }
   ];
   for (const cert of certs) {
