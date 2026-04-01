@@ -1827,8 +1827,8 @@ export default function Portfolio() {
           <nav className="fixed top-0 left-0 right-0 z-40 glass">
             <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
               <a href="#" className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-lg hover:bg-blue-500/30 transition-colors">
-                  {profile?.name?.charAt(0) || 'B'}
+                <div className="w-10 h-10 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center overflow-hidden hover:bg-blue-500/30 transition-colors p-1">
+                  <img src="/upload/profile/BukhTech_Logo-removebg-preview.png" alt="Logo" className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
                 </div>
                 <span className="font-bold gradient-text hidden sm:block">{profile?.name || 'Portfolio'}</span>
               </a>
