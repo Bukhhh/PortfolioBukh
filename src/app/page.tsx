@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Switch } from '@/components/ui/switch';
-import { 
+import {
   Github, Linkedin, Mail, MapPin, ExternalLink, Send,
   ChevronDown, ChevronLeft, ChevronRight, Settings, LogOut, Plus, Trash2, Save,
   Brain, Code, Database, Layers, Zap, X, MessageCircle,
@@ -124,12 +124,12 @@ interface ChatMessage {
 }
 
 // Robot Image Component - using user's uploaded robot character
-function RobotIcon({ 
-  className = "w-12 h-12", 
+function RobotIcon({
+  className = "w-12 h-12",
   animated = false,
-  glow = false 
-}: { 
-  className?: string; 
+  glow = false
+}: {
+  className?: string;
   animated?: boolean;
   glow?: boolean;
 }) {
@@ -139,9 +139,9 @@ function RobotIcon({
       {glow && (
         <div className="absolute inset-0 bg-blue-500/40 rounded-full blur-xl animate-pulse-glow" />
       )}
-      <img 
-        src="/robot.png" 
-        alt="Robo - Portfolio Assistant" 
+      <img
+        src="/robot.png"
+        alt="Robo - Portfolio Assistant"
         className="w-full h-full object-contain relative z-10"
       />
     </div>
@@ -198,12 +198,12 @@ function RoboDialogue() {
     >
       {/* Speech bubble pointer */}
       <div className="absolute -bottom-2 right-8 w-4 h-4 bg-blue-900/90 rotate-45 border-r border-b border-blue-500/30" />
-      
+
       {/* Robot mini icon */}
       <div className="flex items-start gap-2">
-        <img 
-          src="/robot.png" 
-          alt="Robo" 
+        <img
+          src="/robot.png"
+          alt="Robo"
           className="w-8 h-8 object-contain shrink-0"
         />
         <p className="text-xs text-blue-100 leading-relaxed">
@@ -272,19 +272,19 @@ function MusicPlayer() {
 
     const osc = audioContextRef.current.createOscillator();
     const noteGain = audioContextRef.current.createGain();
-    
+
     osc.type = type;
     osc.frequency.value = frequency;
-    
+
     noteGain.gain.setValueAtTime(0.3, startTime);
     noteGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration - 0.02);
-    
+
     osc.connect(noteGain);
     noteGain.connect(gainNodeRef.current);
-    
+
     osc.start(startTime);
     osc.stop(startTime + duration);
-    
+
     oscillatorsRef.current.push(osc);
   };
 
@@ -308,26 +308,26 @@ function MusicPlayer() {
 
     const playLoop = () => {
       if (!audioContextRef.current || !gainNodeRef.current) return;
-      
+
       const now = audioContextRef.current.currentTime;
-      
+
       // Play melody
       const note = melody[noteIndex % melody.length];
       playNote(note.freq, now, note.duration, 'square');
-      
+
       // Play bass every other note
       if (noteIndex % 2 === 0) {
         const bass = bassLine[bassIndex % bassLine.length];
         playNote(bass.freq, now, bass.duration * 2, 'sawtooth');
         bassIndex++;
       }
-      
+
       noteIndex++;
     };
 
     // Play immediately
     playLoop();
-    
+
     // Schedule next notes
     intervalRef.current = setInterval(() => {
       playLoop();
@@ -339,7 +339,7 @@ function MusicPlayer() {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-    
+
     oscillatorsRef.current.forEach(osc => {
       try {
         osc.stop();
@@ -362,7 +362,7 @@ function MusicPlayer() {
   const toggleMute = () => setIsMuted(!isMuted);
 
   return (
-    <div 
+    <div
       className="fixed bottom-6 left-6 z-40"
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
@@ -386,7 +386,7 @@ function MusicPlayer() {
           >
             {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
           </button>
-          
+
           <input
             type="range"
             min="0"
@@ -415,7 +415,7 @@ function MusicPlayer() {
               <span className="hidden sm:inline">MUSIC</span>
             </>
           )}
-          
+
           {/* Sound wave animation when playing */}
           {isPlaying && (
             <div className="flex items-center gap-0.5">
@@ -448,7 +448,7 @@ function FloatingRobotButton({ onClick }: { onClick: () => void }) {
     <div className="fixed bottom-6 right-6 z-40">
       {/* Robo Dialogue - shows random AI facts */}
       <RoboDialogue />
-      
+
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -461,25 +461,25 @@ function FloatingRobotButton({ onClick }: { onClick: () => void }) {
           <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-lg animate-pulse" />
           <div className="absolute inset-4 bg-blue-400/30 rounded-full blur-md animate-pulse" style={{ animationDelay: '0.5s' }} />
         </div>
-        
+
         {/* Robot image - floating animation */}
         <motion.div
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
           animate={{ y: [0, -10, 0] }}
-          transition={{ 
+          transition={{
             y: { duration: 2.5, repeat: Infinity, ease: 'easeInOut' },
             scale: { duration: 0.2 }
           }}
           className="relative z-10"
         >
-          <img 
-            src="/robot.png" 
-            alt="Open Chat" 
+          <img
+            src="/robot.png"
+            alt="Open Chat"
             className="w-36 h-36 object-contain drop-shadow-[0_0_25px_rgba(59,130,246,0.5)] group-hover:drop-shadow-[0_0_40px_rgba(59,130,246,0.8)] transition-all duration-300"
           />
         </motion.div>
-        
+
         {/* Sparkle effects */}
         <motion.div
           className="absolute -top-1 -right-1 w-1.5 h-1.5"
@@ -530,7 +530,7 @@ function IntroPortal({ onComplete }: { onComplete: () => void }) {
 
     let currentDelay = 0;
     const timers: NodeJS.Timeout[] = [];
-    
+
     stages.forEach((s, i) => {
       currentDelay += s.delay;
       const timer = setTimeout(() => {
@@ -567,16 +567,16 @@ function IntroPortal({ onComplete }: { onComplete: () => void }) {
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-blue-400 rounded-full"
-            initial={{ 
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000), 
+            initial={{
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
               y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-              opacity: 0 
+              opacity: 0
             }}
-            animate={{ 
+            animate={{
               y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
               opacity: [0, 1, 0]
             }}
-            transition={{ 
+            transition={{
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2
@@ -598,7 +598,7 @@ function IntroPortal({ onComplete }: { onComplete: () => void }) {
               top: `calc(50% - ${75 + i * 40}px)`,
             }}
             animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-            transition={{ 
+            transition={{
               rotate: { duration: 10 + i * 2, repeat: Infinity, ease: 'linear' },
               scale: { duration: 2, repeat: Infinity, delay: i * 0.2 }
             }}
@@ -624,20 +624,20 @@ function IntroPortal({ onComplete }: { onComplete: () => void }) {
         >
           {/* Glow effect */}
           <div className="absolute inset-0 scale-[1.8]">
-            <motion.div 
+            <motion.div
               className="absolute inset-0 bg-blue-500/30 rounded-full blur-2xl"
               animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </div>
-          
+
           {/* Robot image */}
-          <img 
-            src="/robot.png" 
-            alt="Robo" 
+          <img
+            src="/robot.png"
+            alt="Robo"
             className="w-52 h-52 object-contain relative z-10 drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]"
           />
-          
+
           {/* Sparkle particles around robot */}
           {[...Array(6)].map((_, i) => (
             <motion.div
@@ -647,14 +647,14 @@ function IntroPortal({ onComplete }: { onComplete: () => void }) {
                 top: `${35 + Math.sin(i * 60 * Math.PI / 180) * 50}%`,
                 left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 50}%`,
               }}
-              animate={{ 
-                scale: [0, 1, 0], 
+              animate={{
+                scale: [0, 1, 0],
                 opacity: [0, 1, 0],
               }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
-                delay: i * 0.3 
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.3
               }}
             />
           ))}
@@ -694,12 +694,12 @@ function IntroPortal({ onComplete }: { onComplete: () => void }) {
 }
 
 // Chatbot Component
-function Chatbot({ 
-  assistantName, 
+function Chatbot({
+  assistantName,
   profile,
-  settings 
-}: { 
-  assistantName: string; 
+  settings
+}: {
+  assistantName: string;
   profile: Profile | null;
   settings: Settings | null;
 }) {
@@ -737,7 +737,7 @@ function Chatbot({
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
         setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
       } else {
@@ -778,9 +778,9 @@ function Chatbot({
                   {/* Robot avatar with glow */}
                   <div className="relative">
                     <div className="absolute inset-0 bg-blue-400/30 rounded-full blur-lg scale-125" />
-                    <img 
-                      src="/robot.png" 
-                      alt="Robo" 
+                    <img
+                      src="/robot.png"
+                      alt="Robo"
                       className="w-14 h-14 object-contain relative z-10"
                     />
                   </div>
@@ -823,12 +823,12 @@ function Chatbot({
                         >
                           {/* Glow */}
                           <div className="absolute inset-0 bg-blue-500/30 rounded-full blur-xl scale-[1.5] animate-pulse" />
-                          <img 
-                            src="/robot.png" 
-                            alt="Robo" 
+                          <img
+                            src="/robot.png"
+                            alt="Robo"
                             className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_15px_rgba(59,130,246,0.4)]"
                           />
-                          
+
                           {/* Sparkles */}
                           <motion.div
                             className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-blue-300 rounded-full"
@@ -874,18 +874,17 @@ function Chatbot({
                         {msg.role === 'assistant' && (
                           <div className="relative shrink-0">
                             <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-md scale-110" />
-                            <img 
-                              src="/robot.png" 
-                              alt="Robo" 
+                            <img
+                              src="/robot.png"
+                              alt="Robo"
                               className="w-12 h-12 object-contain relative z-10"
                             />
                           </div>
                         )}
-                        <div className={`rounded-2xl px-4 py-2 max-w-[80%] ${
-                          msg.role === 'user' 
-                            ? 'bg-blue-600 text-white' 
+                        <div className={`rounded-2xl px-4 py-2 max-w-[80%] ${msg.role === 'user'
+                            ? 'bg-blue-600 text-white'
                             : 'bg-muted'
-                        }`}>
+                          }`}>
                           <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
                         </div>
                       </motion.div>
@@ -896,9 +895,9 @@ function Chatbot({
                       <div className="flex gap-3">
                         <div className="relative shrink-0">
                           <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-md scale-110 animate-pulse" />
-                          <img 
-                            src="/robot.png" 
-                            alt="Robo" 
+                          <img
+                            src="/robot.png"
+                            alt="Robo"
                             className="w-12 h-12 object-contain relative z-10"
                           />
                         </div>
@@ -925,8 +924,8 @@ function Chatbot({
                         className="border-blue-500/30 focus:border-blue-500"
                         disabled={isLoading}
                       />
-                      <Button 
-                        type="submit" 
+                      <Button
+                        type="submit"
                         size="icon"
                         disabled={!input.trim() || isLoading}
                         className="bg-blue-600 hover:bg-blue-700"
@@ -946,18 +945,18 @@ function Chatbot({
 }
 
 // Admin Panel Component (simplified for brevity - same as before)
-function AdminPanel({ 
-  isOpen, 
-  onClose, 
-  profile, 
-  projects, 
-  skills, 
+function AdminPanel({
+  isOpen,
+  onClose,
+  profile,
+  projects,
+  skills,
   experiences,
   educations,
   settings,
-  onDataRefresh 
-}: { 
-  isOpen: boolean; 
+  onDataRefresh
+}: {
+  isOpen: boolean;
   onClose: () => void;
   profile: Profile | null;
   projects: Project[];
@@ -1429,7 +1428,7 @@ function AIDiscoverySection() {
         <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}>
           <span className="text-blue-400 mr-3 text-sm">05.</span>AI Discovery<span className="section-line" />
         </h2>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {AI_MODELS.map((model, index) => {
             const colors = COLOR_MAP[model.color];
@@ -1457,12 +1456,12 @@ function AIDiscoverySection() {
                         <p className={`text-xs ${colors.text}`}>{model.provider}</p>
                       </div>
                     </div>
-                    
+
                     {/* Description */}
                     <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                       {model.description}
                     </p>
-                    
+
                     {/* Specialty badge */}
                     <div className="flex items-center gap-2">
                       <Sparkles className={`w-4 h-4 ${colors.text}`} />
@@ -1476,7 +1475,7 @@ function AIDiscoverySection() {
             );
           })}
         </div>
-        
+
         {/* Philosophy note */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1509,7 +1508,7 @@ function CustomCursor() {
 
   useEffect(() => {
     setMounted(true);
-    
+
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const updateMousePosition = (e: MouseEvent) => {
@@ -1518,14 +1517,14 @@ function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isClickable = 
+      const isClickable =
         target.tagName.toLowerCase() === 'a' ||
         target.tagName.toLowerCase() === 'button' ||
         target.closest('a') !== null ||
         target.closest('button') !== null ||
         target.classList.contains('cursor-pointer') ||
         window.getComputedStyle(target).cursor === 'pointer';
-        
+
       setIsHovering(isClickable);
     };
 
@@ -1544,7 +1543,8 @@ function CustomCursor() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @media (pointer: fine) {
           body, a, button, input, textarea, select, [role="button"] { cursor: none !important; }
         }
@@ -1589,7 +1589,7 @@ export default function Portfolio() {
   const [educations, setEducations] = useState<Education[]>([]);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
-  
+
   const [visitorChatbotEnabled, setVisitorChatbotEnabled] = useState(true);
 
   useEffect(() => {
@@ -1660,12 +1660,12 @@ export default function Portfolio() {
   };
 
   // Project Image Carousel Component
-  function ProjectCarousel({ 
-    images, 
+  function ProjectCarousel({
+    images,
     title,
-    statusBadge 
-  }: { 
-    images: string[]; 
+    statusBadge
+  }: {
+    images: string[];
     title: string;
     statusBadge: React.ReactNode;
   }) {
@@ -1718,8 +1718,8 @@ export default function Portfolio() {
     if (images.length === 1) {
       return (
         <div className="relative aspect-video md:aspect-auto md:min-h-[320px] overflow-hidden bg-gradient-to-br from-blue-900/20 to-purple-900/20">
-          <img 
-            src={images[0]} 
+          <img
+            src={images[0]}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
@@ -1733,12 +1733,12 @@ export default function Portfolio() {
       <div className="relative aspect-video md:aspect-auto md:min-h-[320px] overflow-hidden bg-gradient-to-br from-blue-900/20 to-purple-900/20">
         {/* Status Badge */}
         <div className="absolute top-3 left-3 z-20">{statusBadge}</div>
-        
+
         {/* Image Counter */}
         <div className="absolute top-3 right-3 z-20 px-2 py-1 bg-black/50 backdrop-blur-sm rounded-full text-xs text-white font-mono">
           {currentIndex + 1} / {images.length}
         </div>
-        
+
         {/* Carousel Images */}
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
@@ -1768,10 +1768,10 @@ export default function Portfolio() {
             className="absolute inset-0 w-full h-full object-cover cursor-grab active:cursor-grabbing"
           />
         </AnimatePresence>
-        
+
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent md:bg-gradient-to-r pointer-events-none" />
-        
+
         {/* Navigation Arrows */}
         <button
           onClick={() => paginate(-1)}
@@ -1787,7 +1787,7 @@ export default function Portfolio() {
         >
           <ChevronRight className="w-5 h-5" />
         </button>
-        
+
         {/* Dots Indicator */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
           {images.map((_, index) => (
@@ -1797,11 +1797,10 @@ export default function Portfolio() {
                 setDirection(index > currentIndex ? 1 : -1);
                 setCurrentIndex(index);
               }}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === currentIndex 
-                  ? 'bg-white w-4' 
+              className={`w-2 h-2 rounded-full transition-all ${index === currentIndex
+                  ? 'bg-white w-4'
                   : 'bg-white/50 hover:bg-white/70'
-              }`}
+                }`}
               aria-label={`Go to image ${index + 1}`}
             />
           ))}
@@ -1828,7 +1827,7 @@ export default function Portfolio() {
             <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
               <a href="#" className="flex items-center gap-3">
                 <div className="w-14 h-14 rounded-xl bg-[#f8f9fa] border border-blue-500/30 flex items-center justify-center overflow-hidden hover:ring-2 ring-blue-500/50 transition-all shadow-lg shadow-blue-500/10">
-                  <img src="/upload/profile/LOGO.jpeg" alt="Logo" className="w-full h-full object-cover scale-110" />
+                  <img src="/upload/profile/LOGO-RBG.jpeg" alt="Logo" className="w-full h-full object-cover scale-110" />
                 </div>
                 <span className="font-bold gradient-text hidden sm:block text-xl tracking-tight">{profile?.name || 'Portfolio'}</span>
               </a>
@@ -1846,8 +1845,8 @@ export default function Portfolio() {
                     <Label className="text-xs text-muted-foreground flex items-center gap-1 cursor-pointer font-mono" onClick={() => toggleVisitorChatbot(!visitorChatbotEnabled)}>
                       <Bot className="w-3 h-3 text-blue-400" /> AI
                     </Label>
-                    <Switch 
-                      checked={visitorChatbotEnabled} 
+                    <Switch
+                      checked={visitorChatbotEnabled}
                       onCheckedChange={toggleVisitorChatbot}
                       className="scale-75"
                     />
@@ -1864,7 +1863,7 @@ export default function Portfolio() {
               <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] animate-pulse-glow" />
               <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full filter blur-[128px] animate-pulse-glow" style={{ animationDelay: '2s' }} />
             </div>
-            
+
             <div className="relative z-10 max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
               {/* Left side - Text content */}
               <div className="flex-1 text-center md:text-left">
@@ -1885,34 +1884,34 @@ export default function Portfolio() {
                   {profile?.linkedinUrl && <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer"><Button variant="outline" size="lg" className="pixel-btn border-blue-500/30 hover:bg-blue-500/10"><Linkedin className="w-4 h-4 mr-2" />LinkedIn</Button></a>}
                 </motion.div>
               </div>
-              
+
               {/* Right side - Photo */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }} 
-                animate={{ opacity: 1, scale: 1 }} 
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex-shrink-0"
               >
                 <div className="relative">
                   {/* Glow effect behind photo */}
                   <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl scale-110 animate-pulse" />
-                  
+
                   {/* Photo container */}
                   <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-blue-500/50 overflow-hidden bg-gradient-to-br from-blue-900/50 to-blue-950/50">
                     {/* Actual photo */}
-                    <img 
-                      src="/myself.jpeg" 
-                      alt={profile?.name || 'Profile Photo'} 
+                    <img
+                      src="/myself.jpeg"
+                      alt={profile?.name || 'Profile Photo'}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  
+
                   {/* Decorative ring */}
                   <div className="absolute inset-0 rounded-full border-2 border-dashed border-blue-400/20 animate-spin" style={{ animationDuration: '20s' }} />
                 </div>
               </motion.div>
             </div>
-            
+
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="absolute bottom-8 left-1/2 -translate-x-1/2"><ChevronDown className="w-6 h-6 text-blue-400 animate-bounce" /></motion.div>
           </section>
 
@@ -1922,11 +1921,11 @@ export default function Portfolio() {
               <h2 className="text-2xl md:text-3xl font-bold mb-12 flex items-center pixel-title" style={{ fontFamily: "'Press Start 2P', cursive", fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}><span className="text-blue-400 mr-3 text-sm">01.</span>Education<span className="section-line" /></h2>
               <div className="space-y-6">
                 {educations.map((edu, index) => (
-                  <motion.div 
-                    key={edu.id} 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    viewport={{ once: true }} 
+                  <motion.div
+                    key={edu.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
                     <Card className="p-6 border-border glass card-hover border-l-4 border-l-blue-500">
@@ -1961,12 +1960,12 @@ export default function Portfolio() {
               <div className="space-y-12">
                 {experiences.map((exp, index) => {
                   const isEven = index % 2 === 0;
-                  const expImg = exp.company.includes('Loca') 
+                  const expImg = exp.company.includes('Loca')
                     ? 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1000&auto=format&fit=crop'
-                    : exp.company.includes('Madani') 
+                    : exp.company.includes('Madani')
                       ? '/upload/projects/Madani IT Solution/photo_2026-03-28_00-16-09.jpg'
                       : 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop';
-                      
+
                   return (
                     <motion.div key={exp.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }}>
                       <Card className="overflow-hidden border-border glass bg-card/40 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
@@ -1994,7 +1993,7 @@ export default function Portfolio() {
                                 {exp.title}
                                 {exp.current && <Badge className="bg-green-500/20 text-green-400 border border-green-500/30">Current</Badge>}
                               </h3>
-                              
+
                               <p className="text-xl text-blue-400 font-semibold mb-6 flex items-center gap-2">
                                 <Briefcase className="w-5 h-5 inline-block" /> {exp.company}
                               </p>
@@ -2048,19 +2047,19 @@ export default function Portfolio() {
                     }
                     return { badge: '✓ Complete', bg: 'bg-cyan-500/20', text: 'text-cyan-400', border: 'border-cyan-500/30' };
                   };
-                  
+
                   const status = getStatusStyles();
                   const isFeatured = project.featured || project.title?.includes('ClaRity');
                   const isEven = index % 2 === 0;
                   const projectImages = parseImages(project.images, project.imageUrl);
-                  
+
                   // Status badge component
                   const StatusBadge = (
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${status.bg} ${status.text} border ${status.border}`} style={{ fontFamily: "'Press Start 2P', cursive", fontSize: '0.5rem' }}>
                       {status.badge}
                     </span>
                   );
-                  
+
                   return (
                     <motion.div
                       key={project.id}
@@ -2071,17 +2070,17 @@ export default function Portfolio() {
                     >
                       <Card className={`overflow-hidden group transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 ${isFeatured ? 'border-2 border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 to-transparent' : 'border-border hover:border-blue-500/30'}`}
                         style={{ boxShadow: isFeatured ? '0 0 30px rgba(234, 179, 8, 0.1)' : undefined }}>
-                        
+
                         <div className={`grid md:grid-cols-2 gap-0`}>
                           {/* Project Image Carousel - Zig-Zag Position */}
                           <div className={`${isEven ? '' : 'md:order-2'}`}>
-                            <ProjectCarousel 
+                            <ProjectCarousel
                               images={projectImages}
                               title={project.title}
                               statusBadge={StatusBadge}
                             />
                           </div>
-                          
+
                           {/* Project Content - Zig-Zag Position */}
                           <CardContent className={`p-6 flex flex-col justify-between ${isEven ? '' : 'md:order-1'}`}>
                             <div>
@@ -2091,16 +2090,16 @@ export default function Portfolio() {
                                 </h3>
                                 {projectImages.length === 0 && StatusBadge}
                               </div>
-                              
+
                               <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                                 {project.longDescription || project.description}
                               </p>
-                              
+
                               {/* Tech Stack */}
                               <div className="flex flex-wrap gap-2 mb-4">
                                 {parseTechStack(project.techStack).map((tech: string, i: number) => (
-                                  <span 
-                                    key={i} 
+                                  <span
+                                    key={i}
                                     className="px-2 py-1 text-xs rounded bg-blue-500/10 text-blue-300 border border-blue-500/20"
                                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
                                   >
@@ -2109,7 +2108,7 @@ export default function Portfolio() {
                                 ))}
                               </div>
                             </div>
-                            
+
                             {/* Action Buttons */}
                             <div className="flex gap-3 pt-2">
                               {project.demoUrl && (
@@ -2155,17 +2154,17 @@ export default function Portfolio() {
                     <Card className="h-full border-4 border-blue-500/30 glass card-hover overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
                       <CardContent className="p-0 flex flex-col h-full">
                         {cert.imageUrl && (
-                           <div className="aspect-[4/3] relative overflow-hidden bg-blue-900/20 border-b-2 border-blue-500/20">
-                             {cert.imageUrl.endsWith('.pdf') ? (
-                               <div className="absolute inset-0 flex flex-col items-center justify-center bg-blue-900/30">
-                                 <Award className="w-12 h-12 text-blue-400 mb-2" />
-                                 <span className="text-sm font-bold text-blue-300">PDF Document</span>
-                                 <a href={cert.imageUrl} target="_blank" rel="noopener noreferrer" className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-2 rounded text-xs pixel-btn" style={{ fontFamily: "'Press Start 2P', cursive" }}>View PDF</a>
-                               </div>
-                             ) : (
-                               <img src={cert.imageUrl} alt={cert.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-                             )}
-                           </div>
+                          <div className="aspect-[4/3] relative overflow-hidden bg-blue-900/20 border-b-2 border-blue-500/20">
+                            {cert.imageUrl.endsWith('.pdf') ? (
+                              <div className="absolute inset-0 flex flex-col items-center justify-center bg-blue-900/30">
+                                <Award className="w-12 h-12 text-blue-400 mb-2" />
+                                <span className="text-sm font-bold text-blue-300">PDF Document</span>
+                                <a href={cert.imageUrl} target="_blank" rel="noopener noreferrer" className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-2 rounded text-xs pixel-btn" style={{ fontFamily: "'Press Start 2P', cursive" }}>View PDF</a>
+                              </div>
+                            ) : (
+                              <img src={cert.imageUrl} alt={cert.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                            )}
+                          </div>
                         )}
                         <div className="p-6 flex-1 flex flex-col">
                           <h3 className="font-bold text-lg mb-1">{cert.title}</h3>
@@ -2201,7 +2200,7 @@ export default function Portfolio() {
                 I&apos;m currently looking for new opportunities. Feel free to reach out!
               </p>
               <ContactForm profile={profile} />
-              
+
               {/* Contact Links */}
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 <a href="mailto:mohdbukhari03@gmail.com">
@@ -2215,7 +2214,7 @@ export default function Portfolio() {
                   </Button>
                 )}
               </div>
-              
+
               {/* Social Links */}
               <div className="flex justify-center gap-4 mt-4">
                 <a href="https://github.com/Bukhhh" target="_blank" rel="noopener noreferrer">
@@ -2249,7 +2248,7 @@ export default function Portfolio() {
                     © {new Date().getFullYear()} {profile?.name || 'Portfolio'}. All rights reserved.
                   </p>
                 </div>
-                
+
                 {/* Footer Contact Links */}
                 <div className="flex items-center gap-4">
                   <a href="mailto:mohdbukhari03@gmail.com" className="text-muted-foreground hover:text-blue-400 transition-colors">
