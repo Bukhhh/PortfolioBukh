@@ -69,7 +69,12 @@ async function seedContent() {
       title: "MusangKing Hybrid Classification System",
       description: "AI-Powered Durian Ripeness & Variety Classifier",
       longDescription: "Developed an integrated image processing system for classifying Durian ripeness and variety using a Hybrid Pipeline — combining classical Computer Vision with advanced Machine Learning. The 8-step pipeline includes Gamma Correction, LAB Color Space conversion, K-Means Clustering (K=3), Morphological Cleanup, Contour Detection, Geometric Feature Extraction, Color Analysis (RGB/HSV Histograms), and Binary Masking. Multi-class classification identifies varieties (Musang King D197, Black Thorn D200, Udang Merah D175) and ripeness levels (Mature, Immature, Defective). Built for CSC566 - Advanced Image Processing.",
-      images: [],
+      images: [
+        "/upload/projects/MusangKingSystem/Screenshot 2026-04-01 163700.png",
+        "/upload/projects/MusangKingSystem/Screenshot 2026-04-01 163736.png",
+        "/upload/projects/MusangKingSystem/Screenshot 2026-04-01 163927.png",
+        "/upload/projects/MusangKingSystem/Screenshot 2026-04-01 163948.png"
+      ],
       techStack: ['Python', 'Flask', 'OpenCV', 'XGBoost', 'Scikit-learn', 'K-Means Clustering', 'Computer Vision'],
       category: "AI/Computer Vision",
       githubUrl: "https://github.com/Bukhhh/MusangKing_System",
