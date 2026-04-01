@@ -882,8 +882,8 @@ function Chatbot({
                           </div>
                         )}
                         <div className={`rounded-2xl px-4 py-2 max-w-[80%] ${msg.role === 'user'
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-muted'
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-muted'
                           }`}>
                           <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
                         </div>
@@ -1798,8 +1798,8 @@ export default function Portfolio() {
                 setCurrentIndex(index);
               }}
               className={`w-2 h-2 rounded-full transition-all ${index === currentIndex
-                  ? 'bg-white w-4'
-                  : 'bg-white/50 hover:bg-white/70'
+                ? 'bg-white w-4'
+                : 'bg-white/50 hover:bg-white/70'
                 }`}
               aria-label={`Go to image ${index + 1}`}
             />
@@ -1827,7 +1827,7 @@ export default function Portfolio() {
             <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
               <a href="#" className="flex items-center gap-3">
                 <div className="w-14 h-14 rounded-xl bg-[#f8f9fa] border border-blue-500/30 flex items-center justify-center overflow-hidden hover:ring-2 ring-blue-500/50 transition-all shadow-lg shadow-blue-500/10">
-                  <img src="/upload/profile/LOGO-RBG.jpeg" alt="Logo" className="w-full h-full object-cover scale-110" />
+                  <img src="/upload/profile/LOGO-RBG.png" alt="Logo" className="w-full h-full object-cover scale-110" />
                 </div>
                 <span className="font-bold gradient-text hidden sm:block text-xl tracking-tight">{profile?.name || 'Portfolio'}</span>
               </a>
