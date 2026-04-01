@@ -1880,7 +1880,7 @@ export default function Portfolio() {
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-wrap gap-4 justify-center md:justify-start">
                   <a href="#projects"><Button size="lg" className="pixel-btn bg-blue-600 hover:bg-blue-700">View Projects<ExternalLink className="w-4 h-4 ml-2" /></Button></a>
-                  <a href="/resume.pdf" download><Button variant="outline" size="lg" className="pixel-btn border-blue-500/30 hover:bg-blue-500/10"><Download className="w-4 h-4 mr-2" />Resume</Button></a>
+                  <a href="/upload/profile/RESUME_MOHAMAD_BUKHARI.pdf" download="RESUME_MOHAMAD_BUKHARI.pdf" target="_blank" rel="noopener noreferrer"><Button variant="outline" size="lg" className="pixel-btn border-blue-500/30 hover:bg-blue-500/10"><Download className="w-4 h-4 mr-2" />Resume</Button></a>
                   {profile?.githubUrl && <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer"><Button variant="outline" size="lg" className="pixel-btn border-blue-500/30 hover:bg-blue-500/10"><Github className="w-4 h-4 mr-2" />GitHub</Button></a>}
                   {profile?.linkedinUrl && <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer"><Button variant="outline" size="lg" className="pixel-btn border-blue-500/30 hover:bg-blue-500/10"><Linkedin className="w-4 h-4 mr-2" />LinkedIn</Button></a>}
                 </motion.div>
