@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   keywords: ["Mohamad Bukhari", "Portfolio", "AI Developer", "Machine Learning", "Next.js", "UiTM", "Computer Science", "Full-Stack"],
   authors: [{ name: "Mohamad Bukhari" }],
   icons: {
-    icon: "/upload/profile/BukhTech_Logo-removebg-preview.png",
+    icon: "/upload/profile/LOGO.jpeg",
   },
   openGraph: {
     title: "Mohamad Bukhari | Portfolio",
