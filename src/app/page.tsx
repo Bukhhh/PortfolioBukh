@@ -1826,7 +1826,7 @@ export default function Portfolio() {
           <nav className="fixed top-0 left-0 right-0 z-40 glass">
             <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
               <a href="#" className="flex items-center gap-3">
-                <div className="w-14 h-14 rounded-xl bg-[#f8f9fa] border border-blue-500/30 flex items-center justify-center overflow-hidden hover:ring-2 ring-blue-500/50 transition-all shadow-lg shadow-blue-500/10">
+                <div className="w-14 h-14 rounded-xl bg-black border border-blue-500/30 flex items-center justify-center overflow-hidden hover:ring-2 ring-blue-500/50 transition-all shadow-lg shadow-blue-500/10">
                   <img src="/upload/profile/LOGO-RBG.png" alt="Logo" className="w-full h-full object-cover scale-110" />
                 </div>
                 <span className="font-bold gradient-text hidden sm:block text-xl tracking-tight">{profile?.name || 'Portfolio'}</span>
